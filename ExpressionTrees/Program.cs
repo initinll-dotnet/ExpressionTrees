@@ -1,23 +1,18 @@
-﻿using System.Linq.Expressions;
+﻿using ExpressionTrees.Examples;
+using ExpressionTrees.Model;
+
+using System.Reflection;
+
+//Delegates.ExecuteExpressions();
+
+var loc = Assembly.GetExecutingAssembly();
+
+var path = Path.Combine([Path.GetDirectoryName(loc.Location), @"Data\passengers.csv"]);
 
 
-var xExpression = Expression.Parameter(typeof(int), "x");
-var constant12Expression = Expression.Constant(12);
-var constant4Expression = Expression.Constant(4);
+var filtering = new Filtering(path);
+filtering.ExecuteFilters_ExpressionsOfT(survived: true, pClass: 2, gender: Gender.Female, age: null, minimumFare: null);
 
-var greaterThan = Expression.GreaterThanOrEqual(xExpression, constant12Expression);
-var lessThan = Expression.LessThanOrEqual(xExpression, constant4Expression);
-
-// Expression => x > 12 or x < 4
-var orExp = Expression.Or(lessThan, greaterThan);
-// Expression => x > 12
-var expr1 = Expression.Lambda<Func<int, bool>>(body: greaterThan, parameters: [xExpression]);
-var func1 = expr1.Compile();
-
-var expr2 = Expression.Lambda<Func<int, bool>>(body: orExp, parameters: [xExpression]);
-var func2 = expr2.Compile();
-
-Console.WriteLine(func1(11));
-Console.WriteLine(func2(10));
+Console.ReadLine();
 
 
