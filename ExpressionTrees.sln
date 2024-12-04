@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35506.116 d17.12
+VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionTrees", "ExpressionTrees\ExpressionTrees.csproj", "{7C179A10-585C-467B-B7B5-A292BE9F1087}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionTrees.Tests", "ExpressionTrees.Tests\ExpressionTrees.Tests.csproj", "{E5B2A7CA-2423-45CD-8ADE-5D31D025DEE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7C179A10-585C-467B-B7B5-A292BE9F1087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C179A10-585C-467B-B7B5-A292BE9F1087}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C179A10-585C-467B-B7B5-A292BE9F1087}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5B2A7CA-2423-45CD-8ADE-5D31D025DEE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5B2A7CA-2423-45CD-8ADE-5D31D025DEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5B2A7CA-2423-45CD-8ADE-5D31D025DEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5B2A7CA-2423-45CD-8ADE-5D31D025DEE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
