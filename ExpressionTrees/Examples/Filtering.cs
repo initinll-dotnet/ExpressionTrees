@@ -1,5 +1,8 @@
-﻿using ExpressionTrees.Model;
+﻿using AgileObjects.ReadableExpressions;
 
+using ExpressionTrees.Model;
+
+using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 
 namespace ExpressionTrees.Examples;
@@ -253,25 +256,55 @@ public class Filtering
             //_passengers = _passengers.Where(p => p.Fare == minimumFare);
         }
 
+        string query = string.Empty;
         if (currentExpression is not null)
         {
-            var finalExpr = Expression
+            var expr = Expression
                 .Lambda<Func<Passenger, bool>>(
                     body: currentExpression,
                     tailCall: false,
                     parameters: [passengerParameter]);
 
-            var func = finalExpr.Compile();
+            var staticFunc = expr.Compile();
 
-            //var query = finalExpr.ToReadableString();
+            query = expr.ToReadableString();
 
-            _passengers = _passengers.Where(func);
+            _passengers = _passengers.Where(staticFunc);
         }
 
+        Console.WriteLine("########################## Static Query #############################");
+        Console.WriteLine("");
+        Console.WriteLine($"Query - {query}");
+        Console.WriteLine("");
         foreach (var passenger in _passengers)
         {
             Console.WriteLine(passenger);
         }
+        Console.WriteLine("");
+    }
+
+    public void ExecuteFilters_Dynmaic(string query)
+    {
+        if (query is not null)
+        {
+            var expr = DynamicExpressionParser
+                .ParseLambda<Passenger, bool>(
+                    parsingConfig: new ParsingConfig(),
+                    createParameterCtor: true,
+                    expression: query);
+
+            var func = expr.Compile();
+
+            _passengers = _passengers.Where(func);
+        }
+
+        Console.WriteLine("########################## Dyamic Query #############################");
+        Console.WriteLine("");
+        foreach (var passenger in _passengers)
+        {
+            Console.WriteLine(passenger);
+        }
+        Console.WriteLine("");
     }
 
     private Expression CreateExpression<T>(T value, Expression? currentExpression, string propertyName, ParameterExpression objectParameter, string operatorType = "=")
